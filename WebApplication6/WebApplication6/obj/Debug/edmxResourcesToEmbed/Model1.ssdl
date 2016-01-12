@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JB_FoodStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Building">
+    <Key>
+      <PropertyRef Name="building_name" />
+      <PropertyRef Name="unit_num" />
+    </Key>
+    <Property Name="building_name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="unit_num" Type="int" Nullable="false" />
+    <Property Name="capacity" Type="int" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="int" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="25" />
+    <Property Name="first_name" Type="varchar" MaxLength="25" />
+    <Property Name="branch" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="invoiceNum" />
+    </Key>
+    <Property Name="invoiceNum" Type="int" Nullable="false" />
+    <Property Name="branch" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="mfg" />
+    </Key>
+    <Property Name="mfg" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="mfgDiscount" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="25" />
+    <Property Name="mfg" Type="varchar" MaxLength="25" />
+    <Property Name="vendor" Type="varchar" MaxLength="25" />
+    <Property Name="price" Type="money" />
+  </EntityType>
+  <EntityType Name="ProductInvoice">
+    <Key>
+      <PropertyRef Name="productID" />
+      <PropertyRef Name="invoiceNum" />
+    </Key>
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="invoiceNum" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductInvoiceWithQuantity">
+    <Key>
+      <PropertyRef Name="productID" />
+      <PropertyRef Name="invoiceNum" />
+    </Key>
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="invoiceNum" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductPurchaseOrder">
+    <Key>
+      <PropertyRef Name="productID" />
+      <PropertyRef Name="po_num" />
+    </Key>
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="po_num" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PurchaseOrder">
+    <Key>
+      <PropertyRef Name="po_num" />
+    </Key>
+    <Property Name="po_num" Type="int" Nullable="false" />
+    <Property Name="branch" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="branch" />
+    </Key>
+    <Property Name="branch" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="region" Type="varchar" MaxLength="25" />
+    <Property Name="building_name" Type="varchar" MaxLength="20" />
+    <Property Name="unit_num" Type="int" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="vendor" />
+    </Key>
+    <Property Name="vendor" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="supplier_email" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__Employee__branch__2F10007B">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="branch" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="branch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__branch__1DE57479">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="branch" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="branch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__mfg__145C0A3F">
+    <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="mfg" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="mfg" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__vendor__15502E78">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="vendor" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="vendor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIn__invoi__21B6055D">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="ProductInvoice" Type="Self.ProductInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="invoiceNum" />
+      </Principal>
+      <Dependent Role="ProductInvoice">
+        <PropertyRef Name="invoiceNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIn__invoi__25869641">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="1" />
+    <End Role="ProductInvoiceWithQuantity" Type="Self.ProductInvoiceWithQuantity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="invoiceNum" />
+      </Principal>
+      <Dependent Role="ProductInvoiceWithQuantity">
+        <PropertyRef Name="invoiceNum" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIn__produ__20C1E124">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductInvoice" Type="Self.ProductInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="ProductInvoice">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIn__produ__24927208">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductInvoiceWithQuantity" Type="Self.ProductInvoiceWithQuantity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="ProductInvoiceWithQuantity">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductPu__po_nu__2C3393D0">
+    <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="1" />
+    <End Role="ProductPurchaseOrder" Type="Self.ProductPurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrder">
+        <PropertyRef Name="po_num" />
+      </Principal>
+      <Dependent Role="ProductPurchaseOrder">
+        <PropertyRef Name="po_num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductPu__produ__2B3F6F97">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ProductPurchaseOrder" Type="Self.ProductPurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productID" />
+      </Principal>
+      <Dependent Role="ProductPurchaseOrder">
+        <PropertyRef Name="productID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PurchaseO__branc__286302EC">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="branch" />
+      </Principal>
+      <Dependent Role="PurchaseOrder">
+        <PropertyRef Name="branch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Store__1B0907CE">
+    <End Role="Building" Type="Self.Building" Multiplicity="0..1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="building_name" />
+        <PropertyRef Name="unit_num" />
+      </Principal>
+      <Dependent Role="Store">
+        <PropertyRef Name="building_name" />
+        <PropertyRef Name="unit_num" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JB_FoodStoreModelStoreContainer">
+    <EntitySet Name="Building" EntityType="Self.Building" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="ProductInvoice" EntityType="Self.ProductInvoice" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="ProductInvoiceWithQuantity" EntityType="Self.ProductInvoiceWithQuantity" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="ProductPurchaseOrder" EntityType="Self.ProductPurchaseOrder" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="Store" EntityType="Self.Store" Schema="joelSSD" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="joelSSD" store:Type="Tables" />
+    <AssociationSet Name="FK__Employee__branch__2F10007B" Association="Self.FK__Employee__branch__2F10007B">
+      <End Role="Store" EntitySet="Store" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__branch__1DE57479" Association="Self.FK__Invoice__branch__1DE57479">
+      <End Role="Store" EntitySet="Store" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__mfg__145C0A3F" Association="Self.FK__Product__mfg__145C0A3F">
+      <End Role="Manufacturer" EntitySet="Manufacturer" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__vendor__15502E78" Association="Self.FK__Product__vendor__15502E78">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIn__invoi__21B6055D" Association="Self.FK__ProductIn__invoi__21B6055D">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="ProductInvoice" EntitySet="ProductInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIn__invoi__25869641" Association="Self.FK__ProductIn__invoi__25869641">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="ProductInvoiceWithQuantity" EntitySet="ProductInvoiceWithQuantity" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIn__produ__20C1E124" Association="Self.FK__ProductIn__produ__20C1E124">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductInvoice" EntitySet="ProductInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIn__produ__24927208" Association="Self.FK__ProductIn__produ__24927208">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductInvoiceWithQuantity" EntitySet="ProductInvoiceWithQuantity" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductPu__po_nu__2C3393D0" Association="Self.FK__ProductPu__po_nu__2C3393D0">
+      <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+      <End Role="ProductPurchaseOrder" EntitySet="ProductPurchaseOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductPu__produ__2B3F6F97" Association="Self.FK__ProductPu__produ__2B3F6F97">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductPurchaseOrder" EntitySet="ProductPurchaseOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PurchaseO__branc__286302EC" Association="Self.FK__PurchaseO__branc__286302EC">
+      <End Role="Store" EntitySet="Store" />
+      <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Store__1B0907CE" Association="Self.FK__Store__1B0907CE">
+      <End Role="Building" EntitySet="Building" />
+      <End Role="Store" EntitySet="Store" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

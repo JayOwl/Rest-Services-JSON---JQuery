@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <form method="get" action="api/Products">
+            <span id='value1'>(Result)<br /></span>
+            <input type="button" value="Get" onclick="sendRequest()" />
+        </form>
+        <br />
+    </div>
+    <!--Search product by name-->
+    <div>
+        <label for="productIdFind">Find Product by ID:</label>
+        <input type="text" id="productIdFind" size="5" />
+        <input type="button" value="Search" onclick="find();" />
+        <p id="productFind" />
+    </div>
+
+    <!--Create product-->
+    <div>
+        <label for="_New Product"><b>Create Product</b></label>
+        <label for="_ID">productID:</label>
+        <input type="text" id="txtAdd_productID" size="5" />
+        <label for="_Name">Name (Name):</label>
+        <input type="text" id="txtAdd_name" size="5" />
+        <label for="_mfg">Manufacturer (mfg):</label>
+        <input type="text" id="txtAdd_mfg" size="5" />
+        <label for="_vendor">Vendor:</label>
+        <input type="text" id="txtAdd_vendor" size="5" />
+        <label for="_price">Price:</label>
+        <input type="text" id="txtAdd_price" size="5" />
+        <input type="button" value="Add" onclick="create();" />
+        <p id="manufacturerCreate" />
+    </div>
+    <!--Update manufacturer-->
+    <div>
+        <label for="_ID"><b>Update Product Product</b></label>
+        <label for="_ID">productID:</label>
+        <input type="text" id="txtUpdate_productID" size="5" />
+        <label for="_Name">Name (Name):</label>
+        <input type="text" id="txtUpdate_name" size="5" />
+        <label for="_mfg">Manufacturer (mfg):</label>
+        <input type="text" id="txtUpdate_mfg" size="5" />
+        <label for="_vendor">Vendor:</label>
+        <input type="text" id="txtUpdate_vendor" size="5" />
+        <label for="_price">Price:</label>
+        <input type="text" id="txtUpdate_price" size="5" />
+        <input type="button" value="Update" onclick="update();" />
+        <p id="productUpdate" />
+    </div>
+
+    <!--Delete manufacturer by name-->
+    <div>
+        <label for="productID">Delete Product by ID:</label>
+        <input type="text" id="productID" size="5" />
+        <input type="button" value="Delete" onclick="del();" />
+        <p id="productDelete" />
+    </div>
+
+</body>
+</html>

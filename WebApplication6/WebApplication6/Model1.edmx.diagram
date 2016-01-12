@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="126487ac9883484288f16e630ad98516" Name="Diagram1">
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Building" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Employee" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Invoice" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Manufacturer" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Product" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.ProductInvoiceWithQuantity" Width="1.5" PointX="9.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.PurchaseOrder" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Store" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JB_FoodStoreModel.Supplier" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__Store__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__Employee__branch__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__Invoice__branch__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__ProductIn__invoi__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__Product__mfg__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__Product__vendor__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__ProductIn__produ__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.FK__PurchaseO__branc__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.ProductInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="JB_FoodStoreModel.ProductPurchaseOrder" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
